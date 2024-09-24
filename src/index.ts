@@ -54,7 +54,7 @@ app.use("/api", createRouter(db));
 /* --------------------------------- Run app -------------------------------- */
 app.listen(appPort, async () => {
   try {
-    // await dbConnectionHandler.connectDBHandler();
+    await dbConnectionHandler.connectDBHandler();
     console.log(`Ws port`, wsPort);
 
     console.log(`http://localhost:${appPort}`);
