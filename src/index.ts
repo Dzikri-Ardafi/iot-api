@@ -1,6 +1,10 @@
 import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
-import cors from "cors";
+dotenv.config();
+import cors, { CorsOptions } from "cors";
+import dbConnectionHandler from "./utils/dbConnectionHandler";
+import createRouter from "./routes/api";
+import { CollectionInfo, Db } from "mongodb";
 
 const app: Express = express();
 const appPort = 3000;
@@ -11,13 +15,14 @@ const corsOptions = {
   methods: "*",
   origin: "*",
   allowedHeaders: "*",
-};
+  credentials: false,
+  exposedHeaders: "*",
+} as CorsOptions;
 app.use(cors(corsOptions));
 
-/* ------------------------------- Env config ------------------------------- */
-dotenv.config();
-
 /* ------------------------------ Route config ------------------------------ */
+const db = dbConnectionHandler.dbClient.db("iot") as Db;
+app.use("/api", createRouter(db));
 app.get("/", (req, res) => {
   res.send("Welcome to my app");
 });
@@ -25,6 +30,7 @@ app.get("/", (req, res) => {
 /* --------------------------------- Run app -------------------------------- */
 app.listen(appPort, async () => {
   try {
+    await dbConnectionHandler.connectDBHandler();
     console.log(`http://localhost:${appPort}`);
   } catch (error) {
     console.log(error);
