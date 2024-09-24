@@ -1,10 +1,10 @@
-import express, { Express, Request, Response } from "express";
+import express, { Express } from "express";
 import dotenv from "dotenv";
 dotenv.config();
 import cors, { CorsOptions } from "cors";
 import dbConnectionHandler from "./utils/dbConnectionHandler";
 import createRouter from "./routes/api";
-import { CollectionInfo, Db } from "mongodb";
+import { Db } from "mongodb";
 import ws from "ws";
 
 const app: Express = express();
