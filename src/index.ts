@@ -7,8 +7,8 @@ import createRouter from "./routes/api";
 import { CollectionInfo, Db } from "mongodb";
 
 const app: Express = express();
-const appPort = 3000;
-const wsPort = 8080;
+const appPort = process.env.PORT || 3000;
+const wsPort = process.env.PORT_WS || 8080;
 
 /* ------------------------------- Cors config ------------------------------ */
 const corsOptions = {
