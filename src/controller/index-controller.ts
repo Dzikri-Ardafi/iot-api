@@ -7,7 +7,7 @@ class RequestController {
   status: IRequestClass["status"];
   collection: Collection<IResultHardware[]>;
   singleCollection: Collection<IResultHardware>;
-  objectId: ObjectId;
+  objectId: ObjectId | string;
 
   constructor(params: IRequestClass) {
     this.dbConfig = params.dbConfig;
@@ -15,7 +15,7 @@ class RequestController {
     this.status = params.status;
     this.collection = this.dbConfig.collection("hardware");
     this.singleCollection = this.dbConfig.collection("hardware");
-    this.objectId = new ObjectId(params._id);
+    this.objectId = params._id ? new ObjectId(params._id) : "";
   }
 
   // --> getter

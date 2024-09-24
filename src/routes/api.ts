@@ -18,6 +18,8 @@ const createRouter = (DbConfig: Db) => {
       const result = await ReqGetController.dataHardware;
       res.json(result);
     } catch (error) {
+      console.log(error);
+
       res.json({
         message: "Error",
         error,
