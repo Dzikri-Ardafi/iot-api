@@ -61,7 +61,7 @@ app.use('/', (req, res) => {
 });
 
 /* --------------------------------- Run app -------------------------------- */
-app.listen(appPort, async () => {
+app.listen(async () => {
 	try {
 		console.log(`Ws port`, wsPort);
 		await dbConnectionHandler.connectDBHandler();
