@@ -6,10 +6,15 @@ import dbConnectionHandler from "./utils/dbConnectionHandler";
 import createRouter from "./routes/api";
 import { Db } from "mongodb";
 import ws from "ws";
+import path from "path";
 
 const app: Express = express();
 const appPort = process.env.PORT || 3000;
 const wsPort = process.env.PORT_WS || (8080 as any);
+
+/* ---------------------------- Ejs views config ---------------------------- */
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
 
 /* ------------------------------- Cors config ------------------------------ */
 const corsOptions = {
@@ -50,6 +55,10 @@ wss.on("connection", (websocket) => {
 /* ------------------------------ Route config ------------------------------ */
 const db = dbConnectionHandler.dbClient.db("iot") as Db;
 app.use("/api", createRouter(db));
+
+app.use("/", (req, res) => {
+  res.render("index");
+});
 
 /* --------------------------------- Run app -------------------------------- */
 app.listen(appPort, async () => {
