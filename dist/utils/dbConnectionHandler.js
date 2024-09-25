@@ -11,7 +11,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongodb_1 = require("mongodb");
 const dbUri = process.env.ATLAS_URI;
-console.log(dbUri);
 const dbClient = new mongodb_1.MongoClient(dbUri);
 // --> Function to connect to dabatabase
 const connectDBHandler = () => __awaiter(void 0, void 0, void 0, function* () {
